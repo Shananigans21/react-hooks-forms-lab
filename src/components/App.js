@@ -6,6 +6,7 @@ import itemData from "../data/items";
 function App() {
   const [items, setItems] = useState(itemData);
   const [isDarkMode, setIsDarkMode] = useState(false);
+  const [searchTerm, setSearchTerm] = useState(""); // NEW: search state
 
   function handleDarkModeClick() {
     setIsDarkMode((isDarkMode) => !isDarkMode);
@@ -13,8 +14,13 @@ function App() {
 
   return (
     <div className={"App " + (isDarkMode ? "dark" : "light")}>
-      <Header isDarkMode={isDarkMode} onDarkModeClick={handleDarkModeClick} />
-      <ShoppingList items={items} />
+      <Header
+        isDarkMode={isDarkMode}
+        onDarkModeClick={handleDarkModeClick}
+        searchTerm={searchTerm}
+        onSearchChange={setSearchTerm}
+      />
+      <ShoppingList items={items} searchTerm={searchTerm} />
     </div>
   );
 }
